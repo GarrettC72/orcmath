@@ -119,7 +119,7 @@ public class Sampler extends GUIApplication {
 				}
 			}); 
 			viewObjects.add(cb);
-			viewObjects.add(new Pokemon());
+			viewObjects.add(new Pokemon("Charizard", 36, 2));
 		}
 		
 		public void mouseDragged(MouseEvent m) {
