@@ -9,11 +9,11 @@ import guiTeacher.components.Component;
 public class Pokemon extends AnimatedComponent {
 	
 	private String name;
-	private double level;
+	private int level;
 	private int quantity;
 	private String imgAddress;
 
-	public Pokemon(String name, double level, int quantity) {
+	public Pokemon(String name, int level, int quantity) {
 		super(150, 150, 100, 100);
 		this.name = name;
 		this.level = level;
@@ -31,7 +31,7 @@ public class Pokemon extends AnimatedComponent {
 	}
 	
 	public String toString() {
-		return name + "," + level + "," + quantity;
+		return name + ", " + level + ", " + quantity;
 	}
 
 }
