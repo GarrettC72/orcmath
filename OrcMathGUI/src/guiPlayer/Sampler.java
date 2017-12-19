@@ -1,21 +1,28 @@
 package guiPlayer;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import garrettPlay.Pokemon;
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+
 import guiTeacher.GUIApplication;
 import guiTeacher.components.*;
+import guiTeacher.interfaces.FileRequester;
 import guiTeacher.interfaces.KeyedComponent;
 import guiTeacher.interfaces.Visible;
+import guiTeacher.userInterfaces.FileLoader;
 import guiTeacher.userInterfaces.FullFunctionScreen;
 
-public class Sampler extends GUIApplication {
+public class Sampler extends GUIApplication implements FileRequester{
 
 	/**
 	 * 
@@ -56,6 +63,7 @@ public class Sampler extends GUIApplication {
 		public void initAllObjects(List<Visible> viewObjects) {
 			//Set styles
 			StyledComponent.setButtonOutline(true);
+			StyledComponent.setAccentColor(Color.WHITE);
 			setCustomFont();
 			
 			RadioButton rb1 = new RadioButton(480, 40, 30, 30, "X", null);
@@ -120,6 +128,11 @@ public class Sampler extends GUIApplication {
 			}); 
 			viewObjects.add(cb);
 			viewObjects.add(new Pokemon("Charizard", 36, 2));
+			
+			
+				
+				FileOpenButton fileButton = new FileOpenButton(490, 70, 120, 30, null,Sampler.this);
+				viewObjects.add(fileButton);
 		}
 		
 		public void mouseDragged(MouseEvent m) {
@@ -143,6 +156,19 @@ public class Sampler extends GUIApplication {
 			}
 		}
 		
+	}
+
+	@Override
+	public void setFile(File f) {
+		List<String> lines = FileLoader.getFileAsLines(f);
+		System.out.println("Loading file:");
+		for (String line : lines){
+			System.out.println(line);
+		}
+	}
+	@Override
+	public JFrame getWindow() {
+		return this;
 	}
 	
 
