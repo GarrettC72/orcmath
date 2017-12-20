@@ -1,7 +1,11 @@
 package garrettPlay;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import guiPlayer.Book;
 
 public class CatalogMaker {
 	
@@ -18,8 +22,9 @@ public class CatalogMaker {
 	public static void main(String[] args) {
 		CatalogMaker maker = new CatalogMaker();
 		System.out.println(maker.getCSVContent());
-		maker.addPokemon();
+		maker.add();
 		System.out.println(maker.getCSVContent());
+		maker.save();
 	}
 	
 	public String getCSVContent() {
@@ -30,14 +35,32 @@ public class CatalogMaker {
 		return data;
 	}
 	
-	public void addPokemon() {
+	private void save() {
+		try{    
+			FileWriter fw=new FileWriter("PokemonCatalog.csv");
+			for(Pokemon b: pokedex){
+				fw.write(b+"\n");    	
+			}
+
+			fw.close();    
+			System.out.println("Success! File \"PokemonCatalog.csv\" saved!");
+		}catch(IOException e){
+			System.out.println("An IOException was thrown. \nCheck to see that the directory where you tried to save the file actually exists.");
+		}
+	}
+	
+	public void addPokemon(Pokemon b){
+		pokedex.add(b);
+	}
+	
+	public void add() {
 		System.out.println("Please enter the name of the Pokemon.");
 		String n = in.nextLine();
 		System.out.println("Please enter the level of the Pokemon.");
 		String l = in.nextLine();
 		System.out.println("Please enter how many of that Pokemon you have.");
 		String q = in.nextLine();
-		pokedex.add(new Pokemon(n, Integer.parseInt(l), Integer.parseInt(q)));
+		addPokemon(new Pokemon(n, Integer.parseInt(l), Integer.parseInt(q)));
 	}
 
 }
