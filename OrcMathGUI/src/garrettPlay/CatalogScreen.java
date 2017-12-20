@@ -77,7 +77,7 @@ public class CatalogScreen extends FullFunctionScreen implements FileRequester{
 
 	protected void addClicked() {
 		Pokemon p = new Pokemon(descriptionField.getText(),Integer.parseInt(text.getText()),Integer.parseInt(text.getText()));
-		text.setText(p + "\n");
+		text.setText(p.toString());
 		catalog.addPokemon(p);
 	}
 
