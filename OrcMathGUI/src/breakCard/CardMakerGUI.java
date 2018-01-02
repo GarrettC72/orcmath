@@ -5,9 +5,9 @@ import guiTeacher.GUIApplication;
 public class CardMakerGUI extends GUIApplication {
 
 	private static final long serialVersionUID = 258186143576427947L;
-	static CardMakerGUI card;
-	static FrontScreen front;
-	static InsideScreen inside;
+	public static CardMakerGUI card;
+	public static FrontScreen front;
+	public static InsideScreen inside;
 
 	public CardMakerGUI(int width, int height) {
 		super(width, height);
