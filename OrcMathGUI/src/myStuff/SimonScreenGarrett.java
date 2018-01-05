@@ -82,7 +82,6 @@ public class SimonScreenGarrett extends ClickableScreen implements Runnable{
 		    	public void act() {
 		    		if(acceptingInput) {
 		    		    Thread blink = new Thread(new Runnable(){
-
 		    		        public void run(){
 		    		        	b.highlight();
 		    		            try {
@@ -93,8 +92,6 @@ public class SimonScreenGarrett extends ClickableScreen implements Runnable{
 		    		            }
 		    		            b.dim();
 		    		        }
-
-
 		    		    });
 		    		    blink.start();
 		    		    if(b == sequence.get(sequenceIndex).getButton()) {
@@ -123,8 +120,51 @@ public class SimonScreenGarrett extends ClickableScreen implements Runnable{
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		
+	    label.setText("");
+        nextRound();
+	}
+
+	private void nextRound() {
+		acceptingInput = false;
+		roundNumber++;
+		sequence.add(randomMove());
+		progress.setRound(roundNumber);
+		progress.setSequenceSize(sequence.size());
+		changeText("Simon's Turn");
+		label.setText("");
+		playSequence();
+		changeText("Your Turn");
+		acceptingInput = true;
+		sequenceIndex = 0;
+	}
+
+	private void playSequence() {
+		ButtonInterfaceGarrett b = null;
+		for(int i = 0; i < sequence.size(); i++) {
+			if(b != null) {
+				b.dim();
+				b = sequence.get(sequenceIndex).getButton();
+				b.highlight();
+				int sleepTime = (10000 - (roundNumber * 100)) + 1000;
+				try {
+	                Thread.sleep(sleepTime);
+	            } catch (InterruptedException e) {
+	                // TODO Auto-generated catch block
+	                e.printStackTrace();
+	            }
+			}
+		}
+		b.dim();
+	}
+
+	private void changeText(String string) {
+		label.setText(string);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 	}
 
 }
