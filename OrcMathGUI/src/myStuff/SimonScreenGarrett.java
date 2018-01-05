@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+import guiTeacher.components.Action;
 import guiTeacher.components.TextLabel;
 import guiTeacher.interfaces.Visible;
 import guiTeacher.userInterfaces.ClickableScreen;
@@ -71,7 +72,53 @@ public class SimonScreenGarrett extends ClickableScreen implements Runnable{
 		int numberOfButtons = 6;
 		buttons = new ButtonInterfaceGarrett[numberOfButtons];
 		Color[] colors = {Color.BLUE, Color.RED, Color.YELLOW, Color.ORANGE, Color.GREEN, Color.MAGENTA};
-		
+		for(int i = 0; i < numberOfButtons; i++) {
+			final ButtonInterfaceGarrett b = getAButton();
+		    buttons[i] = b;
+		    b.setColor(colors[i]);
+		    b.setX(20 * i);
+		    b.setY(20 * i);
+		    b.setAction(new Action() {
+		    	public void act() {
+		    		if(acceptingInput) {
+		    		    Thread blink = new Thread(new Runnable(){
+
+		    		        public void run(){
+		    		        	b.highlight();
+		    		            try {
+		    		                Thread.sleep(800);
+		    		            } catch (InterruptedException e) {
+		    		                // TODO Auto-generated catch block
+		    		                e.printStackTrace();
+		    		            }
+		    		            b.dim();
+		    		        }
+
+
+		    		    });
+		    		    blink.start();
+		    		    if(b == sequence.get(sequenceIndex).getButton()) {
+		    		    	sequenceIndex++;
+		    		    }
+		    		    else {
+		    		    	progress.gameOver();
+		    		    }
+		    		    if(sequenceIndex == sequence.size()){
+		    		        Thread nextRound = new Thread(SimonScreenGarrett.this);
+		    		        nextRound.start();
+		    		    }
+		    		}
+		    	}
+		    });
+		}
+	}
+	
+	 /**
+	Placeholder until partner finishes implementation of ButtonInterface
+	*/
+	private ButtonInterfaceGarrett getAButton() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
