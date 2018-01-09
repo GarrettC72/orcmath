@@ -6,8 +6,8 @@ public interface ProgressInterfaceGarrett extends Visible {
 
 	void gameOver();
 	
-	int setRound(int n);
+	void setRound(int n);
 	
-	int setSequenceSize(int n);
+	void setSequenceSize(int n);
 
 }

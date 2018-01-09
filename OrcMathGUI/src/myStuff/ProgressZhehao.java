@@ -5,6 +5,9 @@ import java.awt.Graphics2D;
 import guiTeacher.components.Component;
 
 public class ProgressZhehao extends Component implements ProgressInterfaceGarrett {
+	
+	private int roundNumber;
+	private int sequenceSize;
 
 	public ProgressZhehao(int x, int y, int w, int h) {
 		super(x, y, w, h);
@@ -14,18 +17,16 @@ public class ProgressZhehao extends Component implements ProgressInterfaceGarret
 	@Override
 	public void gameOver() {
 		
-
 	}
 
 	@Override
-	public int setRound(int n) {
-		return n+1;
-
+	public void setRound(int n) {
+		roundNumber = n;
 	}
 
 	@Override
-	public int setSequenceSize(int n) {
-		return n+1;
+	public void setSequenceSize(int n) {
+		sequenceSize = n;
 	}
 
 	@Override

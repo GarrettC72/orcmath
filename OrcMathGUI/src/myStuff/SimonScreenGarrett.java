@@ -16,7 +16,7 @@ public class SimonScreenGarrett extends ClickableScreen implements Runnable{
 	private ProgressInterfaceGarrett progress;
 	private ArrayList<MoveInterfaceGarrett> sequence;
 	
-	private int roundNumber;
+	private int roundNumber = 0;
 	private boolean acceptingInput;
 	private int sequenceIndex;
 	private int lastSelectedButton;
@@ -57,15 +57,14 @@ public class SimonScreenGarrett extends ClickableScreen implements Runnable{
 	Placeholder until partner finishes implementation of MoveInterface
 	*/
 	private MoveInterfaceGarrett getMove(int bIndex) {
-		return null;
+		return new MoveZhehao();
 	}
 
 	/**
 	Placeholder until partner finishes implementation of ProgressInterface
 	*/
 	private ProgressInterfaceGarrett getProgress() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ProgressZhehao(10,10,100,100);
 	}
 
 	private void addButtons() {
@@ -76,8 +75,8 @@ public class SimonScreenGarrett extends ClickableScreen implements Runnable{
 			final ButtonInterfaceGarrett b = getAButton();
 		    buttons[i] = b;
 		    b.setColor(colors[i]);
-		    b.setX(20 * i);
-		    b.setY(20 * i);
+		    b.setX(200 + (int)Math.sin(Math.PI * i / 3));
+		    b.setY(200 + (int)Math.sin(Math.PI * i / 3));
 		    b.setAction(new Action() {
 		    	public void act() {
 		    		if(acceptingInput) {
@@ -114,8 +113,7 @@ public class SimonScreenGarrett extends ClickableScreen implements Runnable{
 	Placeholder until partner finishes implementation of ButtonInterface
 	*/
 	private ButtonInterfaceGarrett getAButton() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ButtonZhehao(0,0,50,50,"",null);
 	}
 
 	@Override
