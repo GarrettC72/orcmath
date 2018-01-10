@@ -64,7 +64,7 @@ public class SimonScreenGarrett extends ClickableScreen implements Runnable{
 	Placeholder until partner finishes implementation of ProgressInterface
 	*/
 	private ProgressInterfaceGarrett getProgress() {
-		return new ProgressZhehao(10,10,100,100);
+		return new ProgressZhehao(0, 0, 860, 140);
 	}
 
 	private void addButtons() {
@@ -73,10 +73,9 @@ public class SimonScreenGarrett extends ClickableScreen implements Runnable{
 		Color[] colors = {Color.BLUE, Color.RED, Color.YELLOW, Color.ORANGE, Color.GREEN, Color.MAGENTA};
 		for(int i = 0; i < numberOfButtons; i++) {
 			final ButtonInterfaceGarrett b = getAButton();
-		    buttons[i] = b;
 		    b.setColor(colors[i]);
-		    b.setX(200 + 20 * (int)Math.sin(Math.PI * i / 3));
-		    b.setY(200 + 20 * (int)Math.sin(Math.PI * i / 3));
+		    b.setX(400 + (int)(150 * Math.cos(Math.PI * i / 3)));
+		    b.setY(200 + (int)(150 * Math.sin(Math.PI * i / 3)));
 		    b.setAction(new Action() {
 		    	public void act() {
 		    		if(acceptingInput) {
@@ -95,17 +94,21 @@ public class SimonScreenGarrett extends ClickableScreen implements Runnable{
 		    		    blink.start();
 		    		    if(b == sequence.get(sequenceIndex).getButton()) {
 		    		    	sequenceIndex++;
+		    		    	if(sequenceIndex == sequence.size()){
+			    		        Thread nextRound = new Thread(SimonScreenGarrett.this);
+			    		        nextRound.start();
+			    		    }
 		    		    }
 		    		    else {
 		    		    	progress.gameOver();
-		    		    }
-		    		    if(sequenceIndex == sequence.size()){
-		    		        Thread nextRound = new Thread(SimonScreenGarrett.this);
-		    		        nextRound.start();
+		    		    	for(int i = 0; i < buttons.length; i++) {
+		    					buttons[i].setAction(null);
+		    				}
 		    		    }
 		    		}
 		    	}
 		    });
+		    buttons[i] = b;
 		}
 	}
 	
@@ -142,9 +145,9 @@ public class SimonScreenGarrett extends ClickableScreen implements Runnable{
 			if(b != null) {
 				b.dim();
 			}
-			b = sequence.get(sequenceIndex).getButton();
+			b = sequence.get(i).getButton();
 			b.highlight();
-			int sleepTime = (10000 - (roundNumber * 100)) + 1000;
+			int sleepTime = (1000 - (roundNumber * 100)) + 100;
 			try {
 				Thread.sleep(sleepTime);
 			} catch (InterruptedException e) {
@@ -156,13 +159,22 @@ public class SimonScreenGarrett extends ClickableScreen implements Runnable{
 	}
 
 	private void changeText(String string) {
-		label.setText(string);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+		Thread changer = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				label.setText(string);
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				label.setText("");
+			}
+			
+		});
+		changer.start();
 	}
 
 }

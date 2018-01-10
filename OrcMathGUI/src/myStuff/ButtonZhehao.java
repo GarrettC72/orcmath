@@ -25,25 +25,28 @@ public class ButtonZhehao extends Button implements ButtonInterfaceGarrett{
 
 	@Override
 	public void setColor(Color color) {
+		this.setBackground(color);
 		this.color = color;
-		setBackground(color);
+		update();
 	}
 
 	@Override
 	public void highlight() {
-		setColor(Color.WHITE);
+		this.setBackground(Color.white);
+		update();
 	}
 
 	@Override
 	public void dim() {
-		setColor(color);
+		this.setBackground(this.color);
+		update();
 	}
 	
 	public void drawButton(Graphics2D g, boolean hover) {
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
 		drawShape(g, hover);
-		g.setColor(color);
+		g.setBackground(color);
 	}
 
 }
