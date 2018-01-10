@@ -8,10 +8,11 @@ public class ProgressZhehao extends Component implements ProgressInterfaceGarret
 	
 	private int roundNumber;
 	private int sequenceSize;
+	private boolean progressState;
 
 	public ProgressZhehao(int x, int y, int w, int h) {
 		super(x, y, w, h);
-		// TODO Auto-generated constructor stub
+		update();
 	}
 
 	@Override
@@ -32,7 +33,6 @@ public class ProgressZhehao extends Component implements ProgressInterfaceGarret
 	@Override
 	public void update(Graphics2D g) {
 		
-
 	}
 
 }

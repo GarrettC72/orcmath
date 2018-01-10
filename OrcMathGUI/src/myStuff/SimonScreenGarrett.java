@@ -31,7 +31,7 @@ public class SimonScreenGarrett extends ClickableScreen implements Runnable{
 	public void initAllObjects(List<Visible> viewObjects) {
 		addButtons();
 		for(ButtonInterfaceGarrett b: buttons){ 
-		    viewObjects.add(b); 
+		    viewObjects.add(b);
 		}
 		progress = getProgress();
 		label = new TextLabel(130,230,300,40,"Let's play Simon!");
@@ -57,7 +57,7 @@ public class SimonScreenGarrett extends ClickableScreen implements Runnable{
 	Placeholder until partner finishes implementation of MoveInterface
 	*/
 	private MoveInterfaceGarrett getMove(int bIndex) {
-		return new MoveZhehao();
+		return new MoveZhehao(buttons[bIndex]);
 	}
 
 	/**
@@ -75,8 +75,8 @@ public class SimonScreenGarrett extends ClickableScreen implements Runnable{
 			final ButtonInterfaceGarrett b = getAButton();
 		    buttons[i] = b;
 		    b.setColor(colors[i]);
-		    b.setX(200 + (int)Math.sin(Math.PI * i / 3));
-		    b.setY(200 + (int)Math.sin(Math.PI * i / 3));
+		    b.setX(200 + 20 * (int)Math.sin(Math.PI * i / 3));
+		    b.setY(200 + 20 * (int)Math.sin(Math.PI * i / 3));
 		    b.setAction(new Action() {
 		    	public void act() {
 		    		if(acceptingInput) {
@@ -141,15 +141,15 @@ public class SimonScreenGarrett extends ClickableScreen implements Runnable{
 		for(int i = 0; i < sequence.size(); i++) {
 			if(b != null) {
 				b.dim();
-				b = sequence.get(sequenceIndex).getButton();
-				b.highlight();
-				int sleepTime = (10000 - (roundNumber * 100)) + 1000;
-				try {
-	                Thread.sleep(sleepTime);
-	            } catch (InterruptedException e) {
-	                // TODO Auto-generated catch block
-	                e.printStackTrace();
-	            }
+			}
+			b = sequence.get(sequenceIndex).getButton();
+			b.highlight();
+			int sleepTime = (10000 - (roundNumber * 100)) + 1000;
+			try {
+				Thread.sleep(sleepTime);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		b.dim();

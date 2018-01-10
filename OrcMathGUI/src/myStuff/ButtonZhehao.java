@@ -11,15 +11,16 @@ import guiTeacher.components.Button;
 public class ButtonZhehao extends Button implements ButtonInterfaceGarrett{
 	
 	private Color color;
+	private boolean buttonState;
 
 	public ButtonZhehao(int x, int y, int w, int h, String text, Color color, Action action) {
 		super(x, y, w, h, text, color, action);
-		// TODO Auto-generated constructor stub
+		update();
 	}
 
 	public ButtonZhehao(int x, int y, int w, int h, String text, Action action) {
 		super(x, y, w, h, "", null);
-		// TODO Auto-generated constructor stub
+		update();
 	}
 
 	@Override
