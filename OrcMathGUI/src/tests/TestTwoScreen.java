@@ -74,9 +74,7 @@ public class TestTwoScreen extends FullFunctionScreen {
 					scoreDisplay.setText("Score: " + count);
 				}
 			}
-
 		});
 		viewObjects.add(playButton);
 	}
-
 }
