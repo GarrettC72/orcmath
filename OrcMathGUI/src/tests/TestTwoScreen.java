@@ -10,7 +10,7 @@ import guiTeacher.interfaces.Visible;
 import guiTeacher.userInterfaces.FullFunctionScreen;
 
 public class TestTwoScreen extends FullFunctionScreen {
-	
+
 	private Button playButton;
 	private TextLabel scoreDisplay;
 	private TextLabel countdown;
@@ -38,43 +38,43 @@ public class TestTwoScreen extends FullFunctionScreen {
 			public void act() {
 				if(!isPlaying) {
 					Thread count = new Thread(new Runnable(){
-	    		        public void run(){
-	    		        	playButton.setEnabled(false);
-	    		        	for(int i = 3; i > 0; i--) {
-	    		        		countdown.setText(i + "...");
-	        		            try {
-	        		                Thread.sleep(1000);
-	        		            } catch (InterruptedException e) {
-	        		                // TODO Auto-generated catch block
-	        		                e.printStackTrace();
-	        		            }
-	    		        	}
-	    		        	countdown.setText("Go!");
-	    		        	playButton.setText("Click Me!");
-	    		        	playButton.setEnabled(true);
-	    		        	isPlaying = true;
-	    		        	for(int i = 5; i > 0; i--) {
-	    		        		clock.setText(i + " seconds left");
-	        		            try {
-	        		                Thread.sleep(1000);
-	        		            } catch (InterruptedException e) {
-	        		                // TODO Auto-generated catch block
-	        		                e.printStackTrace();
-	        		            }
-	    		        	}
-	    		        	clock.setText("0 seconds left");
-	    		        	playButton.setText("Done.");
-	    		        	playButton.setEnabled(false);
-	    		        	isPlaying = false;
-	    		        }
-	    		    });
+						public void run(){
+							playButton.setEnabled(false);
+							for(int i = 3; i > 0; i--) {
+								countdown.setText(i + "...");
+								try {
+									Thread.sleep(1000);
+								} catch (InterruptedException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+							countdown.setText("Go!");
+							playButton.setText("Click Me!");
+							playButton.setEnabled(true);
+							isPlaying = true;
+							for(int i = 5; i > 0; i--) {
+								clock.setText(i + " seconds left");
+								try {
+									Thread.sleep(1000);
+								} catch (InterruptedException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+							clock.setText("0 seconds left");
+							playButton.setText("Done.");
+							playButton.setEnabled(false);
+							isPlaying = false;
+						}
+					});
 					count.start();
 				}else {
 					count++;
 					scoreDisplay.setText("Score: " + count);
 				}
 			}
-			
+
 		});
 		viewObjects.add(playButton);
 	}
